@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://c4xrayfi42esb"]
+
+[ext_resource type="Script" uid="uid://b2wppg7ae82qr" path="res://scripts/asset_diagnostic.gd" id="1_0pe7c"]
+
+[node name="asset_diagnostic" type="Node"]
+script = ExtResource("1_0pe7c")

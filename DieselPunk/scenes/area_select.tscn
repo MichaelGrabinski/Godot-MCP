@@ -1,0 +1,57 @@
+[gd_scene load_steps=3 format=3 uid="uid://dv2jl5pgv642r"]
+
+[ext_resource type="Script" uid="uid://dv82w8l5pcrhj" path="res://area_select.gd" id="1_hrvro"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rpqcr"]
+bg_color = Color(0.3, 0.2, 0.15, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.6, 0.4, 0.2, 1)
+
+[node name="AreaSelect" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_hrvro")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.12, 0.08, 0.06, 1)
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 0
+offset_left = 250.0
+offset_top = 100.0
+offset_right = 250.0
+offset_bottom = 100.0
+theme_override_colors/font_color = Color(1, 0.8, 0.3, 1)
+theme_override_font_sizes/font_size = 60
+text = "SELECT YOUR DOMAIN"
+
+[node name="BackButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 50.0
+offset_top = 50.0
+offset_right = 250.0
+offset_bottom = 120.0
+theme_override_colors/font_color = Color(1, 0.9, 0.6, 1)
+theme_override_font_sizes/font_size = 28
+theme_override_styles/normal = SubResource("StyleBoxFlat_rpqcr")
+text = "← BACK"
+
+[node name="@GridContainer@24902" type="GridContainer" parent="."]
+layout_mode = 0
+offset_left = 100.0
+offset_top = 250.0
+offset_right = 100.0
+offset_bottom = 250.0
+theme_override_constants/h_separation = 40
+theme_override_constants/v_separation = 40
+columns = 2

@@ -1,0 +1,79 @@
+[gd_scene load_steps=5 format=3 uid="uid://cj6x3fv3tu00f"]
+
+[ext_resource type="Script" uid="uid://edmrhuwswb21" path="res://enemy_ai.gd" id="1_mncer"]
+[ext_resource type="Script" uid="uid://loo77v24xcwv" path="res://player.gd" id="2_wicfy"]
+[ext_resource type="Script" uid="uid://di2vgrsv0g1kr" path="res://game_manager.gd" id="3_go42g"]
+[ext_resource type="Script" uid="uid://com2aucolv2o1" path="res://debug_display.gd" id="3_sreuk"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="A test node" type="Node3D" parent="."]
+
+[node name="MainCamera" type="Camera3D" parent="A test node"]
+transform = Transform3D(1, 0, 0, 0, 0.866026, 0.5, 0, -0.5, 0.866026, 0, 3, 6)
+current = true
+fov = 45.0
+
+[node name="Cube" type="CSGBox3D" parent="A test node"]
+size = Vector3(2, 2, 2)
+
+[node name="Enemy" type="CharacterBody3D" parent="."]
+script = ExtResource("1_mncer")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Enemy"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Enemy"]
+
+[node name="DetectionArea" type="Area3D" parent="Enemy"]
+
+[node name="DetectionShape" type="CollisionShape3D" parent="Enemy/DetectionArea"]
+
+[node name="Waypoints" type="Node3D" parent="."]
+
+[node name="Waypoint1" type="Marker3D" parent="Waypoints"]
+
+[node name="Waypoint2" type="Marker3D" parent="Waypoints"]
+
+[node name="Waypoint3" type="Marker3D" parent="Waypoints"]
+
+[node name="Player" type="CharacterBody3D" parent="."]
+script = ExtResource("2_wicfy")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Player"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
+
+[node name="Camera3D" type="Camera3D" parent="Player"]
+current = true
+
+[node name="HealthBar" type="ProgressBar" parent="Player"]
+
+[node name="Ground" type="StaticBody3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="GameInfo" type="Label" parent="UI"]
+offset_right = 1.0
+offset_bottom = 23.0
+text = "WASD: Move | Space: Jump | Shift: Sprint | Left Click: Attack | ESC: Mouse"
+
+[node name="DebugLabel" type="Label" parent="UI"]
+script = ExtResource("3_sreuk")
+
+[node name="HealthBar" type="ProgressBar" parent="UI"]
+offset_right = 4.0
+offset_bottom = 27.0
+value = 100.0
+
+[node name="Obstacles" type="Node3D" parent="."]
+
+[node name="GameManager" type="Node" parent="."]
+script = ExtResource("3_go42g")

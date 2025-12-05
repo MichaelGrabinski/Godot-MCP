@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://cg4coggj5yx5h"]
+
+[ext_resource type="Script" uid="uid://dgjnchye8wncs" path="res://synergies.gd" id="1_e2ft3"]
+
+[node name="Synergies" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_e2ft3")

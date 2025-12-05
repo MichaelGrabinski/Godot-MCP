@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://57k0k1wvvesm"]
+
+[ext_resource type="Script" uid="uid://p6ucrjtk0fc2" path="res://area_select_dynamic.gd" id="1_38umx"]
+
+[node name="AreaSelect" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_38umx")

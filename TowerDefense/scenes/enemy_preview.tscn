@@ -1,0 +1,112 @@
+[gd_scene load_steps=22 format=3 uid="uid://glreqodat7qg"]
+
+[ext_resource type="Texture2D" uid="uid://sexbv5404fk3" path="res://TowerDefense/craftpix/2d-monster-sprites/PNG/7/7_enemies_1_walk_000.png" id="1_0s7ka"]
+[ext_resource type="Texture2D" uid="uid://bxrukeyoa10df" path="res://TowerDefense/craftpix/2d-monster-sprites/PNG/7/7_enemies_1_walk_001.png" id="2_rmr2g"]
+[ext_resource type="Texture2D" uid="uid://det2rjjuoncup" path="res://TowerDefense/craftpix/2d-monster-sprites/PNG/7/7_enemies_1_walk_002.png" id="3_mqxtv"]
+[ext_resource type="Texture2D" uid="uid://du1kw1f37yk8k" path="res://TowerDefense/craftpix/2d-monster-sprites/PNG/7/7_enemies_1_walk_003.png" id="4_ymr46"]
+[ext_resource type="Texture2D" uid="uid://8cqcsx6kjd3w" path="res://TowerDefense/craftpix/2d-monster-sprites/PNG/7/7_enemies_1_walk_004.png" id="5_d41re"]
+[ext_resource type="Texture2D" uid="uid://dwds2a4cw3v0q" path="res://TowerDefense/craftpix/2d-monster-sprites/PNG/7/7_enemies_1_walk_005.png" id="6_rfpha"]
+[ext_resource type="Texture2D" uid="uid://gavq7iswumga" path="res://TowerDefense/craftpix/2d-monster-sprites/PNG/7/7_enemies_1_walk_006.png" id="7_8gq2x"]
+[ext_resource type="Texture2D" uid="uid://xwtfpymfuj0f" path="res://TowerDefense/craftpix/2d-monster-sprites/PNG/7/7_enemies_1_walk_007.png" id="8_sgyq0"]
+[ext_resource type="Texture2D" uid="uid://cgheq0f2ydfte" path="res://TowerDefense/craftpix/2d-monster-sprites/PNG/7/7_enemies_1_walk_008.png" id="9_t2uxj"]
+[ext_resource type="Texture2D" uid="uid://cepyrsrbd1hov" path="res://TowerDefense/craftpix/2d-monster-sprites/PNG/7/7_enemies_1_walk_009.png" id="10_b0fj1"]
+[ext_resource type="Texture2D" uid="uid://c73soiyihtl8s" path="res://TowerDefense/craftpix/2d-monster-sprites/PNG/7/7_enemies_1_walk_010.png" id="11_mulcp"]
+[ext_resource type="Texture2D" uid="uid://buw6fjadwvbv3" path="res://TowerDefense/craftpix/2d-monster-sprites/PNG/7/7_enemies_1_walk_011.png" id="12_wpp4f"]
+[ext_resource type="Texture2D" uid="uid://bt4luit7x5wuj" path="res://TowerDefense/craftpix/2d-monster-sprites/PNG/7/7_enemies_1_walk_012.png" id="13_yc0vv"]
+[ext_resource type="Texture2D" uid="uid://gs33g1o21dai" path="res://TowerDefense/craftpix/2d-monster-sprites/PNG/7/7_enemies_1_walk_013.png" id="14_yd20l"]
+[ext_resource type="Texture2D" uid="uid://bvax7bcgk8e3o" path="res://TowerDefense/craftpix/2d-monster-sprites/PNG/7/7_enemies_1_walk_014.png" id="15_r6iuf"]
+[ext_resource type="Texture2D" uid="uid://be6fpeejkc4pe" path="res://TowerDefense/craftpix/2d-monster-sprites/PNG/7/7_enemies_1_walk_015.png" id="16_2h3ol"]
+[ext_resource type="Texture2D" uid="uid://281oyow5q0yo" path="res://TowerDefense/craftpix/2d-monster-sprites/PNG/7/7_enemies_1_walk_016.png" id="17_eoy4c"]
+[ext_resource type="Texture2D" uid="uid://bavcijn83qha6" path="res://TowerDefense/craftpix/2d-monster-sprites/PNG/7/7_enemies_1_walk_017.png" id="18_ak3rs"]
+[ext_resource type="Texture2D" uid="uid://bso2lewj5edag" path="res://TowerDefense/craftpix/2d-monster-sprites/PNG/7/7_enemies_1_walk_018.png" id="19_p2spp"]
+[ext_resource type="Texture2D" uid="uid://cc2gxocomhrip" path="res://TowerDefense/craftpix/2d-monster-sprites/PNG/7/7_enemies_1_walk_019.png" id="20_4g12l"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_62kv5"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 0.01,
+"texture": ExtResource("1_0s7ka")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_rmr2g")
+}, {
+"duration": 2.0,
+"texture": ExtResource("3_mqxtv")
+}, {
+"duration": 3.0,
+"texture": ExtResource("4_ymr46")
+}, {
+"duration": 4.0,
+"texture": ExtResource("5_d41re")
+}, {
+"duration": 5.0,
+"texture": ExtResource("6_rfpha")
+}, {
+"duration": 6.0,
+"texture": ExtResource("7_8gq2x")
+}, {
+"duration": 7.0,
+"texture": ExtResource("8_sgyq0")
+}, {
+"duration": 8.0,
+"texture": ExtResource("9_t2uxj")
+}, {
+"duration": 9.0,
+"texture": ExtResource("10_b0fj1")
+}, {
+"duration": 10.0,
+"texture": ExtResource("11_mulcp")
+}, {
+"duration": 11.0,
+"texture": ExtResource("12_wpp4f")
+}, {
+"duration": 12.0,
+"texture": ExtResource("13_yc0vv")
+}, {
+"duration": 13.0,
+"texture": ExtResource("14_yd20l")
+}, {
+"duration": 14.0,
+"texture": ExtResource("15_r6iuf")
+}, {
+"duration": 15.0,
+"texture": ExtResource("16_2h3ol")
+}, {
+"duration": 16.0,
+"texture": ExtResource("17_eoy4c")
+}, {
+"duration": 17.0,
+"texture": ExtResource("18_ak3rs")
+}, {
+"duration": 18.0,
+"texture": ExtResource("19_p2spp")
+}, {
+"duration": 19.0,
+"texture": ExtResource("20_4g12l")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 12.0
+}]
+
+[node name="enemy_preview" type="Node2D"]
+
+[node name="PreviewSprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(576, 324)
+scale = Vector2(3, 3)
+sprite_frames = SubResource("SpriteFrames_62kv5")
+animation = &"walk"
+frame_progress = 0.98034453
+
+[node name="@Label@49322" type="Label" parent="."]
+offset_left = 400.0
+offset_top = 50.0
+offset_right = 400.0
+offset_bottom = 50.0
+theme_override_font_sizes/font_size = 24
+text = "Enemy Preview - Animated Walk Cycle"

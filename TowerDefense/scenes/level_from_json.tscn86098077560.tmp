@@ -1,0 +1,119 @@
+[gd_scene load_steps=4 format=3 uid="uid://dgoiist4ohw77"]
+
+[ext_resource type="Script" uid="uid://cecbekms8dfn2" path="res://TowerDefense/scripts/game_manager.gd" id="1_n8h6q"]
+[ext_resource type="Script" uid="uid://i7ft3fxuaxl8" path="res://TowerDefense/scripts/enemy_spawner.gd" id="2_v5iq0"]
+
+[sub_resource type="GDScript" id="GDScript_2uq25"]
+script/source = "extends Node2D
+	
+	@export var level_json_path: String = 'res://TowerDefense/assets/level_data.json'
+	
+	var game_manager
+	var selected_tower = null
+	
+	func _ready():
+		# Load level from JSON
+		var LevelLoader = load('res://TowerDefense/scripts/level_loader.gd')
+		LevelLoader.load_level(level_json_path, self)
+		
+		game_manager = $GameManager
+		
+		# Connect UI
+		$UI/HUD/StartWaveButton.pressed.connect(_on_start_wave_pressed)
+		
+		# Connect tower spots after they're loaded
+		await get_tree().process_frame
+		var tower_spots = get_node_or_null('TowerSpots')
+		if tower_spots:
+			for spot in tower_spots.get_children():
+				if spot is ColorRect:
+					spot.gui_input.connect(_on_tower_spot_clicked.bind(spot))
+	
+	func _on_start_wave_pressed():
+		if game_manager:
+			game_manager.start_wave()
+	
+	func _on_tower_spot_clicked(event: InputEvent, spot: ColorRect):
+		if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+			place_tower(spot)
+	
+	func place_tower(spot: ColorRect):
+		# Check if spot already has a tower
+		if spot.get_child_count() > 0:
+			return
+		
+		# Check if we have enough gold
+		var tower_cost = 100
+		if not game_manager.spend_gold(tower_cost):
+			custom_print(['Not enough gold!'])
+			return
+		
+		# Create tower
+		var tower = Node2D.new()
+		var tower_script = load('res://TowerDefense/scripts/tower.gd')
+		tower.set_script(tower_script)
+		tower.position = spot.size / 2
+		spot.add_child(tower)
+		
+		custom_print(['Tower placed!'])
+	"
+
+[node name="level_from_json" type="Node2D"]
+script = SubResource("GDScript_2uq25")
+
+[node name="GameManager" type="Node" parent="."]
+script = ExtResource("1_n8h6q")
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="HUD" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MoneyLabel" type="Label" parent="UI/HUD"]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 20.0
+offset_bottom = 20.0
+theme_override_font_sizes/font_size = 24
+text = "Gold: 500"
+
+[node name="LivesLabel" type="Label" parent="UI/HUD"]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 60.0
+offset_right = 20.0
+offset_bottom = 60.0
+theme_override_font_sizes/font_size = 24
+text = "Lives: 20"
+
+[node name="WaveLabel" type="Label" parent="UI/HUD"]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 100.0
+offset_right = 20.0
+offset_bottom = 100.0
+theme_override_font_sizes/font_size = 24
+text = "Wave: 1"
+
+[node name="StartWaveButton" type="Button" parent="UI/HUD"]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 140.0
+offset_right = 170.0
+offset_bottom = 180.0
+text = "START WAVE"
+
+[node name="Towers" type="Node2D" parent="."]
+
+[node name="Enemies" type="Node2D" parent="."]
+
+[node name="Projectiles" type="Node2D" parent="."]
+
+[node name="EnemySpawner" type="Node" parent="."]
+script = ExtResource("2_v5iq0")

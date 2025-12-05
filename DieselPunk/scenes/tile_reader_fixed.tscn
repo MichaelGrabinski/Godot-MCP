@@ -1,0 +1,27 @@
+[gd_scene load_steps=2 format=3 uid="uid://coav2srojhldx"]
+
+[ext_resource type="Script" uid="uid://cmjeneufn37po" path="res://scripts/tile_reader.gd" id="1_4wlch"]
+
+[node name="TileReader" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_4wlch")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Panel"]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = -10.0
+
+[node name="OutputLabel" type="Label" parent="Panel/ScrollContainer"]
+layout_mode = 2
+text = "Loading..."
+autowrap_mode = 2

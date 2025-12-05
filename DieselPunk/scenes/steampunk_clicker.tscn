@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://ddiloy6o3o3bm"]
+
+[ext_resource type="Script" uid="uid://ddnvsmv2hjvct" path="res://steampunk_clicker.gd" id="1_cs2kt"]
+
+[node name="steampunk_clicker" type="Node2D"]
+script = ExtResource("1_cs2kt")

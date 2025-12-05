@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://rdnsuy5pm34f"]
+
+[ext_resource type="Script" uid="uid://cmjeneufn37po" path="res://scripts/tile_reader.gd" id="1_ie361"]
+
+[node name="TileReader" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_ie361")

@@ -1,0 +1,199 @@
+[gd_scene load_steps=5 format=3 uid="uid://bmdyymp1wxssw"]
+
+[ext_resource type="Script" uid="uid://cecbekms8dfn2" path="res://TowerDefense/scripts/game_manager.gd" id="1_sms6p"]
+[ext_resource type="Script" uid="uid://i7ft3fxuaxl8" path="res://TowerDefense/scripts/enemy_spawner.gd" id="2_fid1g"]
+
+[sub_resource type="GDScript" id="GDScript_gbir1"]
+script/source = "extends Node2D
+	
+	@export var load_from_json: bool = false
+	@export var json_path: String = \"res://TowerDefense/assets/level_data.json\"
+	
+	var game_manager
+	var selected_tower = null
+	
+	func _ready():
+		# Optional: Load level from JSON
+		if load_from_json:
+			var LevelLoader = load(\"res://TowerDefense/scripts/level_loader.gd\")
+			LevelLoader.load_level(json_path, self)
+			await get_tree().process_frame
+		
+		game_manager = $GameManager
+		
+		# Connect start button
+		$UI/HUD/StartWaveButton.pressed.connect(_on_start_wave_pressed)
+		
+		# Connect tower spots
+		await get_tree().process_frame
+		var tower_spots = get_node_or_null(\"TowerSpots\")
+		if tower_spots:
+			for spot in tower_spots.get_children():
+				if spot is ColorRect:
+					spot.gui_input.connect(_on_tower_spot_clicked.bind(spot))
+	
+	func _on_start_wave_pressed():
+		if game_manager:
+			game_manager.start_wave()
+	
+	func _on_tower_spot_clicked(event: InputEvent, spot: ColorRect):
+		if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+			place_tower(spot)
+	
+	func place_tower(spot: ColorRect):
+		# Check if spot already has a tower
+		if spot.get_child_count() > 0:
+			return
+		
+		# Check if we have enough gold
+		var tower_cost = 100
+		if not game_manager.spend_gold(tower_cost):
+			custom_print(['Not enough gold!'])
+			return
+		
+		# Create tower
+		var tower = Node2D.new()
+		var tower_script = load('res://TowerDefense/scripts/tower.gd')
+		tower.set_script(tower_script)
+		tower.position = spot.size / 2
+		spot.add_child(tower)
+		
+		custom_print(['Tower placed!'])
+	
+	func _input(event):
+		if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+			# Deselect tower
+			if selected_tower:
+				selected_tower.hide_range()
+				selected_tower = null
+	"
+
+[sub_resource type="Curve2D" id="Curve2D_tp3q0"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 100, 100, 0, 0, 0, 0, 300, 100, 0, 0, 0, 0, 300, 300, 0, 0, 0, 0, 500, 300, 0, 0, 0, 0, 500, 500, 0, 0, 0, 0, 700, 500)
+}
+point_count = 6
+
+[node name="test_level" type="Node2D"]
+script = SubResource("GDScript_gbir1")
+
+[node name="GameManager" type="Node" parent="."]
+script = ExtResource("1_sms6p")
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="HUD" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MoneyLabel" type="Label" parent="UI/HUD"]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 20.0
+offset_bottom = 20.0
+theme_override_font_sizes/font_size = 24
+text = "Gold: 500"
+
+[node name="LivesLabel" type="Label" parent="UI/HUD"]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 60.0
+offset_right = 20.0
+offset_bottom = 60.0
+theme_override_font_sizes/font_size = 24
+text = "Lives: 20"
+
+[node name="WaveLabel" type="Label" parent="UI/HUD"]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 100.0
+offset_right = 20.0
+offset_bottom = 100.0
+theme_override_font_sizes/font_size = 24
+text = "Wave: 1"
+
+[node name="StartWaveButton" type="Button" parent="UI/HUD"]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 140.0
+offset_right = 170.0
+offset_bottom = 180.0
+text = "START WAVE"
+
+[node name="Instructions" type="Label" parent="UI/HUD"]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 200.0
+offset_right = 20.0
+offset_bottom = 200.0
+theme_override_font_sizes/font_size = 16
+text = "Click spots to place towers (Cost: 100 gold)
+Click START WAVE to begin"
+
+[node name="PathLayer" type="Node2D" parent="."]
+
+[node name="EnemyPath" type="Path2D" parent="PathLayer"]
+curve = SubResource("Curve2D_tp3q0")
+
+[node name="PathVisual" type="Line2D" parent="PathLayer/EnemyPath"]
+points = PackedVector2Array(100, 100, 300, 100, 300, 300, 500, 300, 500, 500, 700, 500)
+width = 60.0
+default_color = Color(0.4, 0.3, 0.2, 0.8)
+
+[node name="TowerSpots" type="Node2D" parent="."]
+
+[node name="TowerSpot1" type="ColorRect" parent="TowerSpots"]
+offset_left = 160.0
+offset_top = 160.0
+offset_right = 240.0
+offset_bottom = 240.0
+color = Color(0.3, 0.6, 0.3, 0.5)
+
+[node name="TowerSpot2" type="ColorRect" parent="TowerSpots"]
+offset_left = 360.0
+offset_top = 160.0
+offset_right = 440.0
+offset_bottom = 240.0
+color = Color(0.3, 0.6, 0.3, 0.5)
+
+[node name="TowerSpot3" type="ColorRect" parent="TowerSpots"]
+offset_left = 560.0
+offset_top = 160.0
+offset_right = 640.0
+offset_bottom = 240.0
+color = Color(0.3, 0.6, 0.3, 0.5)
+
+[node name="TowerSpot4" type="ColorRect" parent="TowerSpots"]
+offset_left = 160.0
+offset_top = 360.0
+offset_right = 240.0
+offset_bottom = 440.0
+color = Color(0.3, 0.6, 0.3, 0.5)
+
+[node name="TowerSpot5" type="ColorRect" parent="TowerSpots"]
+offset_left = 360.0
+offset_top = 360.0
+offset_right = 440.0
+offset_bottom = 440.0
+color = Color(0.3, 0.6, 0.3, 0.5)
+
+[node name="TowerSpot6" type="ColorRect" parent="TowerSpots"]
+offset_left = 560.0
+offset_top = 360.0
+offset_right = 640.0
+offset_bottom = 440.0
+color = Color(0.3, 0.6, 0.3, 0.5)
+
+[node name="Towers" type="Node2D" parent="."]
+
+[node name="Enemies" type="Node2D" parent="."]
+
+[node name="Projectiles" type="Node2D" parent="."]
+
+[node name="EnemySpawner" type="Node" parent="."]
+script = ExtResource("2_fid1g")
